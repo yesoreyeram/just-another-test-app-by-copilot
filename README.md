@@ -121,9 +121,8 @@ Each theme supports both light and dark modes with carefully chosen color palett
 The project includes a complete GitHub Actions workflow that:
 1. Lints the code
 2. Runs unit tests
-3. Runs E2E tests
-4. Builds the application
-5. Deploys to GitHub Pages (on main branch)
+3. Builds the application
+4. Deploys to GitHub Pages (on main branch)
 
 ## License
 
