@@ -1,19 +1,19 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Header } from '@/components/Header'
-import { Button } from '@/components/ui/button'
+import { Home } from '@/pages/Home'
+import { DesignSystem } from '@/pages/DesignSystem'
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1 flex items-center justify-center p-4">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className="text-6xl font-bold tracking-tight">Hello World</h1>
-          <Button size="lg" className="text-lg px-8 py-6">
-            Explore more...
-          </Button>
-        </div>
-      </main>
-    </div>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/design" element={<DesignSystem />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 
