@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Input } from '@/components/ui/input'
@@ -6,7 +7,44 @@ import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
+import { Slider } from '@/components/ui/slider'
+import { Badge } from '@/components/ui/badge'
+import { Tag, Tags } from '@/components/ui/tag'
+import { MultiSelect } from '@/components/ui/multi-select'
+import { Grid, Flex } from '@/components/ui/layout'
+import { Spacer, Box } from '@/components/ui/spacing'
 import { designTokens } from '@/lib/design-tokens'
+
+// Demo component for MultiSelect with state
+function MultiSelectDemo() {
+  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([])
+  
+  const frameworkOptions = [
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue' },
+    { value: 'angular', label: 'Angular' },
+    { value: 'svelte', label: 'Svelte' },
+    { value: 'solid', label: 'Solid' },
+    { value: 'qwik', label: 'Qwik' },
+  ]
+
+  return (
+    <div className="space-y-2">
+      <Label>Select Frameworks</Label>
+      <MultiSelect
+        options={frameworkOptions}
+        selected={selectedFrameworks}
+        onChange={setSelectedFrameworks}
+        placeholder="Select frameworks..."
+      />
+      {selectedFrameworks.length > 0 && (
+        <p className="text-sm text-muted-foreground">
+          Selected: {selectedFrameworks.join(', ')}
+        </p>
+      )}
+    </div>
+  )
+}
 
 export function DesignSystem() {
   return (
@@ -300,6 +338,166 @@ export function DesignSystem() {
                   <Separator orientation="vertical" />
                   <p className="text-sm">Right</p>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Slider / Range */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Slider / Range</h3>
+            <div className="space-y-4 max-w-md">
+              <div className="space-y-2">
+                <Label>Default Slider</Label>
+                <Slider defaultValue={[50]} max={100} step={1} />
+              </div>
+              <div className="space-y-2">
+                <Label>Range Slider</Label>
+                <Slider defaultValue={[25, 75]} max={100} step={1} />
+              </div>
+              <div className="space-y-2">
+                <Label>Disabled Slider</Label>
+                <Slider defaultValue={[50]} max={100} step={1} disabled />
+              </div>
+            </div>
+          </div>
+
+          {/* Badge */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Badge</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Variants</p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Badge>Default</Badge>
+                  <Badge variant="secondary">Secondary</Badge>
+                  <Badge variant="destructive">Destructive</Badge>
+                  <Badge variant="outline">Outline</Badge>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Tag & Tags */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Tag & Tags List</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Tags with remove action</p>
+                <Tags>
+                  <Tag onRemove={() => console.log('Remove React')}>React</Tag>
+                  <Tag onRemove={() => console.log('Remove TypeScript')}>TypeScript</Tag>
+                  <Tag onRemove={() => console.log('Remove Tailwind')}>Tailwind CSS</Tag>
+                  <Tag onRemove={() => console.log('Remove Vite')}>Vite</Tag>
+                </Tags>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Tags with variants</p>
+                <Tags>
+                  <Tag variant="default">Default</Tag>
+                  <Tag variant="secondary">Secondary</Tag>
+                  <Tag variant="outline">Outline</Tag>
+                  <Tag variant="outline" onRemove={() => console.log('Remove')}>
+                    With Remove
+                  </Tag>
+                </Tags>
+              </div>
+            </div>
+          </div>
+
+          {/* Multi-Select */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Multi-Select Dropdown</h3>
+            <div className="space-y-4 max-w-md">
+              <MultiSelectDemo />
+            </div>
+          </div>
+        </section>
+
+        {/* Layout Utilities */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="text-3xl font-semibold mb-2">Layout Utilities</h2>
+            <p className="text-muted-foreground">
+              Utility components for common layout patterns like Grid, FlexBox, and spacing.
+            </p>
+          </div>
+
+          {/* Grid */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Grid</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">2 Columns Grid</p>
+                <Grid cols={2} gap={4}>
+                  <div className="p-4 bg-accent rounded-md">Item 1</div>
+                  <div className="p-4 bg-accent rounded-md">Item 2</div>
+                  <div className="p-4 bg-accent rounded-md">Item 3</div>
+                  <div className="p-4 bg-accent rounded-md">Item 4</div>
+                </Grid>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">4 Columns Grid</p>
+                <Grid cols={4} gap={3}>
+                  <div className="p-3 bg-accent rounded-md text-sm">1</div>
+                  <div className="p-3 bg-accent rounded-md text-sm">2</div>
+                  <div className="p-3 bg-accent rounded-md text-sm">3</div>
+                  <div className="p-3 bg-accent rounded-md text-sm">4</div>
+                </Grid>
+              </div>
+            </div>
+          </div>
+
+          {/* Flex */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">FlexBox</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Horizontal (justify-between)</p>
+                <Flex justify="between" className="p-4 border rounded-md">
+                  <div className="p-2 bg-accent rounded">Left</div>
+                  <div className="p-2 bg-accent rounded">Right</div>
+                </Flex>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Vertical with center alignment</p>
+                <Flex direction="col" align="center" gap={3} className="p-4 border rounded-md">
+                  <div className="p-2 bg-accent rounded">Item 1</div>
+                  <div className="p-2 bg-accent rounded">Item 2</div>
+                  <div className="p-2 bg-accent rounded">Item 3</div>
+                </Flex>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Horizontal with gap and wrap</p>
+                <Flex wrap="wrap" gap={4} className="p-4 border rounded-md">
+                  <div className="p-3 bg-accent rounded">Tag 1</div>
+                  <div className="p-3 bg-accent rounded">Tag 2</div>
+                  <div className="p-3 bg-accent rounded">Tag 3</div>
+                  <div className="p-3 bg-accent rounded">Tag 4</div>
+                  <div className="p-3 bg-accent rounded">Tag 5</div>
+                </Flex>
+              </div>
+            </div>
+          </div>
+
+          {/* Spacing */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Spacing Utilities</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Spacer Component</p>
+                <div className="border rounded-md p-4">
+                  <div className="bg-accent p-2 rounded">Item 1</div>
+                  <Spacer size={8} />
+                  <div className="bg-accent p-2 rounded">Item 2</div>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Box with Padding and Margin</p>
+                <Box p={4} className="border rounded-md">
+                  <Box p={3} className="bg-accent rounded-md">
+                    Content with padding
+                  </Box>
+                </Box>
               </div>
             </div>
           </div>
