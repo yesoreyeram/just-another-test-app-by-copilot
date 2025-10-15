@@ -15,7 +15,29 @@ import { Grid, Flex } from '@/components/ui/layout'
 import { Spacer, Box } from '@/components/ui/spacing'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { Avatar } from '@/components/ui/avatar'
+import { ColorPicker } from '@/components/ui/color-picker'
 import { designTokens } from '@/lib/design-tokens'
+
+// Demo component for ColorPicker with state
+function ColorPickerDemo() {
+  const [color, setColor] = useState('#3b82f6')
+  
+  return (
+    <div className="space-y-2">
+      <Label htmlFor="color-picker">Pick a color</Label>
+      <ColorPicker id="color-picker" value={color} onChange={setColor} />
+      <div className="flex items-center gap-2">
+        <div 
+          className="h-12 w-12 rounded-md border shadow-sm" 
+          style={{ backgroundColor: color }}
+        />
+        <p className="text-sm text-muted-foreground">
+          Selected color: <span className="font-mono font-semibold">{color}</span>
+        </p>
+      </div>
+    </div>
+  )
+}
 
 // Demo component for MultiSelect with state
 function MultiSelectDemo() {
@@ -326,6 +348,18 @@ export function DesignSystem() {
               <div className="space-y-2">
                 <Label htmlFor="disabled">Disabled</Label>
                 <Input id="disabled" placeholder="Disabled input" disabled />
+              </div>
+            </div>
+          </div>
+
+          {/* Color Picker */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Color Picker</h3>
+            <div className="space-y-4 max-w-md">
+              <ColorPickerDemo />
+              <div className="space-y-2">
+                <Label htmlFor="disabled-color">Disabled</Label>
+                <ColorPicker id="disabled-color" value="#6b7280" disabled />
               </div>
             </div>
           </div>
