@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Slider } from '@/components/ui/slider'
+import { MultiStepRangeSlider } from '@/components/ui/multi-step-range-slider'
 import { Badge } from '@/components/ui/badge'
 import { Tag, Tags } from '@/components/ui/tag'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -180,6 +181,30 @@ function MultiSelectDemo() {
           Selected: {selectedFrameworks.join(', ')}
         </p>
       )}
+    </div>
+  )
+}
+
+// Demo component for MultiStepRangeSlider with state
+function MultiStepRangeSliderDemo() {
+  const sizes = ['XS', 'S', 'M', 'L', 'XL']
+  const [selectedSize, setSelectedSize] = useState<string>('M')
+  const [selectedIndex, setSelectedIndex] = useState<number>(2)
+  
+  return (
+    <div className="space-y-2">
+      <Label>Select Size</Label>
+      <MultiStepRangeSlider
+        steps={sizes}
+        defaultValue={[2]}
+        onStepChange={(step, index) => {
+          setSelectedSize(step)
+          setSelectedIndex(index)
+        }}
+      />
+      <p className="text-sm text-muted-foreground">
+        Selected: <span className="font-mono font-semibold">{selectedSize}</span> (index: {selectedIndex})
+      </p>
     </div>
   )
 }
@@ -692,6 +717,40 @@ export function DesignSystem() {
               <div className="space-y-2">
                 <Label>Disabled Slider</Label>
                 <Slider defaultValue={[50]} max={100} step={1} disabled />
+              </div>
+            </div>
+          </div>
+
+          {/* Multi-Step Range Slider */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Multi-Step Range Slider</h3>
+            <div className="space-y-4 max-w-md">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Size selector (XS, S, M, L, XL)</p>
+                <MultiStepRangeSliderDemo />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Priority levels</p>
+                <MultiStepRangeSlider
+                  steps={['Low', 'Medium', 'High', 'Critical']}
+                  defaultValue={[1]}
+                />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Without labels</p>
+                <MultiStepRangeSlider
+                  steps={['A', 'B', 'C', 'D', 'E']}
+                  defaultValue={[2]}
+                  showLabels={false}
+                />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Disabled</p>
+                <MultiStepRangeSlider
+                  steps={['XS', 'S', 'M', 'L', 'XL']}
+                  defaultValue={[2]}
+                  disabled
+                />
               </div>
             </div>
           </div>
