@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 import { designNavigation, type NavigationItem } from '@/lib/design-navigation'
 import { cn } from '@/lib/utils'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 interface SidebarItemProps {
   item: NavigationItem
@@ -61,15 +62,19 @@ function SidebarItem({ item, level = 0 }: SidebarItemProps) {
 
 export function DesignSidebar() {
   return (
-    <aside className="w-64 border-r bg-background h-full overflow-y-auto sticky top-0">
-      <div className="p-4">
-        <h2 className="text-lg font-semibold mb-4">Design System</h2>
-        <nav>
-          {designNavigation.map((item, index) => (
-            <SidebarItem key={index} item={item} />
-          ))}
-        </nav>
+    <aside className="w-64 border-r bg-background h-full flex flex-col">
+      <div className="p-4 border-b">
+        <h2 className="text-lg font-semibold">Design System</h2>
       </div>
+      <ScrollArea className="flex-1">
+        <div className="p-4">
+          <nav>
+            {designNavigation.map((item, index) => (
+              <SidebarItem key={index} item={item} />
+            ))}
+          </nav>
+        </div>
+      </ScrollArea>
     </aside>
   )
 }

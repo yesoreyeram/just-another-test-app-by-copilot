@@ -44,6 +44,7 @@ export const designNavigation: NavigationItem[] = [
       { title: 'Multi-Select', path: '/design/components/multi-select' },
       { title: 'Multi-Step Range Slider', path: '/design/components/multi-step-range-slider' },
       { title: 'Progress', path: '/design/components/progress' },
+      { title: 'Scroll Area', path: '/design/components/scroll-area' },
       { title: 'Section', path: '/design/components/section' },
       { title: 'Section Divider', path: '/design/components/section-divider' },
       { title: 'Select', path: '/design/components/select' },
