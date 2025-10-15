@@ -32,6 +32,27 @@ export function ColorsPage() {
       </section>
 
       <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Primary Color Palette</h2>
+        <p className="text-muted-foreground">
+          A comprehensive scale of primary color variants from light to dark, perfect for creating depth and hierarchy.
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {Object.entries(designTokens.palettes.primary).map(([name, value]) => (
+            <div key={name} className="space-y-2">
+              <div 
+                className="h-20 rounded-lg border shadow-sm"
+                style={{ backgroundColor: value }}
+              />
+              <div className="space-y-1">
+                <p className="text-sm font-medium">{name}</p>
+                <p className="text-xs text-muted-foreground font-mono">{value}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Main Palette</h2>
         <p className="text-muted-foreground">
           A vibrant collection of 12 colors for general use.
