@@ -1,51 +1,54 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-type Theme = 'sky' | 'sea' | 'forest' | 'gold' | 'pink' | 'chocolate' | 'halloween' | 'diwali' | 'valentine'
-type Mode = 'light' | 'dark'
+type ThemeAppearance = 'light' | 'dark' | 'inherit'
+type AccentColor = 'tomato' | 'red' | 'ruby' | 'crimson' | 'pink' | 'plum' | 'purple' | 'violet' | 'iris' | 'indigo' | 'blue' | 'cyan' | 'teal' | 'jade' | 'green' | 'grass' | 'brown' | 'orange' | 'sky' | 'mint' | 'lime' | 'yellow' | 'amber' | 'gold' | 'bronze' | 'gray'
 
 interface ThemeContextType {
-  theme: Theme
-  mode: Mode
-  setTheme: (theme: Theme) => void
-  setMode: (mode: Mode) => void
-  toggleMode: () => void
+  appearance: ThemeAppearance
+  accentColor: AccentColor
+  setAppearance: (appearance: ThemeAppearance) => void
+  setAccentColor: (accentColor: AccentColor) => void
+  toggleAppearance: () => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('theme')
-    return (stored as Theme) || 'sky'
+  const [appearance, setAppearance] = useState<ThemeAppearance>(() => {
+    const stored = localStorage.getItem('appearance')
+    return (stored as ThemeAppearance) || 'inherit'
   })
-  
-  const [mode, setMode] = useState<Mode>(() => {
-    const stored = localStorage.getItem('mode')
-    return (stored as Mode) || 'light'
+
+  const [accentColor, setAccentColor] = useState<AccentColor>(() => {
+    const stored = localStorage.getItem('accentColor')
+    return (stored as AccentColor) || 'blue'
   })
 
   useEffect(() => {
-    localStorage.setItem('theme', theme)
-    localStorage.setItem('mode', mode)
-    
-    const root = document.documentElement
-    
-    // Remove all theme classes
-    root.classList.remove('theme-sky', 'theme-sea', 'theme-forest', 'theme-gold', 'theme-pink', 'theme-chocolate', 'theme-halloween', 'theme-diwali', 'theme-valentine')
-    root.classList.remove('dark', 'light')
-    
-    // Add current theme and mode
-    root.classList.add(`theme-${theme}`)
-    root.classList.add(mode)
-  }, [theme, mode])
+    localStorage.setItem('appearance', appearance)
+  }, [appearance])
 
-  const toggleMode = () => {
-    setMode(prevMode => prevMode === 'light' ? 'dark' : 'light')
+  useEffect(() => {
+    localStorage.setItem('accentColor', accentColor)
+  }, [accentColor])
+
+  const toggleAppearance = () => {
+    setAppearance((prev) => {
+      if (prev === 'inherit') {
+        // If inherit, check system preference and toggle to opposite
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        return systemPrefersDark ? 'light' : 'dark'
+      } else if (prev === 'light') {
+        return 'dark'
+      } else {
+        return 'light'
+      }
+    })
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, mode, setTheme, setMode, toggleMode }}>
+    <ThemeContext.Provider value={{ appearance, accentColor, setAppearance, setAccentColor, toggleAppearance }}>
       {children}
     </ThemeContext.Provider>
   )

@@ -14,23 +14,45 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { Breadcrumbs, type BreadcrumbItem } from '@/components/ui/breadcrumbs'
 
-type Theme = 'sky' | 'sea' | 'forest' | 'gold' | 'pink' | 'chocolate' | 'halloween' | 'diwali' | 'valentine'
+type AccentColor = 'tomato' | 'red' | 'ruby' | 'crimson' | 'pink' | 'plum' | 'purple' | 'violet' | 'iris' | 'indigo' | 'blue' | 'cyan' | 'teal' | 'jade' | 'green' | 'grass' | 'brown' | 'orange' | 'sky' | 'mint' | 'lime' | 'yellow' | 'amber' | 'gold' | 'bronze' | 'gray'
 
-const themes = [
-  { value: 'sky', label: 'Sky' },
-  { value: 'sea', label: 'Sea' },
-  { value: 'forest', label: 'Forest' },
-  { value: 'gold', label: 'Gold' },
+const accentColors = [
+  { value: 'tomato', label: 'Tomato' },
+  { value: 'red', label: 'Red' },
+  { value: 'ruby', label: 'Ruby' },
+  { value: 'crimson', label: 'Crimson' },
   { value: 'pink', label: 'Pink' },
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'halloween', label: 'Halloween' },
-  { value: 'diwali', label: 'Diwali' },
-  { value: 'valentine', label: "Valentine's Day" },
+  { value: 'plum', label: 'Plum' },
+  { value: 'purple', label: 'Purple' },
+  { value: 'violet', label: 'Violet' },
+  { value: 'iris', label: 'Iris' },
+  { value: 'indigo', label: 'Indigo' },
+  { value: 'blue', label: 'Blue' },
+  { value: 'cyan', label: 'Cyan' },
+  { value: 'teal', label: 'Teal' },
+  { value: 'jade', label: 'Jade' },
+  { value: 'green', label: 'Green' },
+  { value: 'grass', label: 'Grass' },
+  { value: 'brown', label: 'Brown' },
+  { value: 'orange', label: 'Orange' },
+  { value: 'sky', label: 'Sky' },
+  { value: 'mint', label: 'Mint' },
+  { value: 'lime', label: 'Lime' },
+  { value: 'yellow', label: 'Yellow' },
+  { value: 'amber', label: 'Amber' },
+  { value: 'gold', label: 'Gold' },
+  { value: 'bronze', label: 'Bronze' },
+  { value: 'gray', label: 'Gray' },
 ] as const
 
 export function Header() {
-  const { theme, mode, setTheme, toggleMode } = useTheme()
+  const { appearance, accentColor, setAccentColor, toggleAppearance } = useTheme()
   const location = useLocation()
+
+  // Determine the current effective appearance
+  const effectiveAppearance = appearance === 'inherit'
+    ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+    : appearance
 
   // Generate breadcrumbs based on current path
   const getBreadcrumbs = (): BreadcrumbItem[] => {
@@ -99,27 +121,27 @@ export function Header() {
           <div className="flex items-center gap-2">
             <Sun className="h-4 w-4" />
             <Switch
-              checked={mode === 'dark'}
-              onCheckedChange={toggleMode}
+              checked={effectiveAppearance === 'dark'}
+              onCheckedChange={toggleAppearance}
               aria-label="Toggle dark mode"
             />
             <Moon className="h-4 w-4" />
           </div>
 
-          {/* Theme Dropdown */}
+          {/* Accent Color Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon" aria-label="Select theme">
+              <Button variant="outline" size="icon" aria-label="Select accent color">
                 <Palette className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Select Theme</DropdownMenuLabel>
+              <DropdownMenuLabel>Accent Color</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuRadioGroup value={theme} onValueChange={(value) => setTheme(value as Theme)}>
-                {themes.map((t) => (
-                  <DropdownMenuRadioItem key={t.value} value={t.value}>
-                    {t.label}
+              <DropdownMenuRadioGroup value={accentColor} onValueChange={(value) => setAccentColor(value as AccentColor)}>
+                {accentColors.map((color) => (
+                  <DropdownMenuRadioItem key={color.value} value={color.value}>
+                    {color.label}
                   </DropdownMenuRadioItem>
                 ))}
               </DropdownMenuRadioGroup>

@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Theme } from '@radix-ui/themes'
+import { useTheme } from '@/contexts/ThemeContext'
 import { Header } from '@/components/Header'
 import { Home } from '@/pages/Home'
 import { DesignLayout } from '@/pages/DesignLayout'
@@ -51,7 +53,7 @@ import { FlexPage } from '@/pages/design/layout/FlexPage'
 import { LayoutSpacingPage } from '@/pages/design/layout/LayoutSpacingPage'
 import { Toaster } from '@/components/ui/toaster'
 
-function App() {
+function AppContent() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <div className="min-h-screen flex flex-col">
@@ -111,6 +113,16 @@ function App() {
         <Toaster />
       </div>
     </BrowserRouter>
+  )
+}
+
+function App() {
+  const { appearance, accentColor } = useTheme()
+  
+  return (
+    <Theme appearance={appearance} accentColor={accentColor}>
+      <AppContent />
+    </Theme>
   )
 }
 
