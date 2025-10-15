@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { Slider } from '@/components/ui/slider'
 import { Badge } from '@/components/ui/badge'
 import { Tag, Tags } from '@/components/ui/tag'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { MultiSelect } from '@/components/ui/multi-select'
 import { Grid, Flex } from '@/components/ui/layout'
 import { Spacer, Box } from '@/components/ui/spacing'
@@ -667,6 +668,106 @@ export function DesignSystem() {
                   <Badge variant="destructive">Destructive</Badge>
                   <Badge variant="outline">Outline</Badge>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Tooltip */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Tooltip</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Default Tooltip</p>
+                <TooltipProvider>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="outline">Hover me</Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>This is a helpful tooltip</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button>Action Button</Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Click to perform an action</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Badge>Badge with tooltip</Badge>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Tooltips work with any element</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </TooltipProvider>
+              </div>
+              
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Different positions</p>
+                <TooltipProvider>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="outline">Top</Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="top">
+                        <p>Tooltip on top</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="outline">Right</Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">
+                        <p>Tooltip on right</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="outline">Bottom</Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom">
+                        <p>Tooltip on bottom</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="outline">Left</Button>
+                      </TooltipTrigger>
+                      <TooltipContent side="left">
+                        <p>Tooltip on left</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </TooltipProvider>
+              </div>
+
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Rich content</p>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button variant="outline">Detailed info</Button>
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs">
+                      <div className="space-y-2">
+                        <p className="font-semibold">Tooltip Title</p>
+                        <p className="text-sm">Tooltips can contain rich content with multiple lines and formatted text.</p>
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </div>
           </div>
