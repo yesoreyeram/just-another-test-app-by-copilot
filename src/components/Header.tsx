@@ -1,4 +1,5 @@
 import { Moon, Sun, Palette } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useTheme } from '@/contexts/ThemeContext'
 import { Button } from '@/components/ui/button'
 import {
@@ -30,7 +31,16 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center justify-between px-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold">Hello</h1>
+          <Link to="/" className="text-xl font-bold hover:opacity-80 transition-opacity">
+            Hello
+          </Link>
+          <nav className="flex items-center gap-2">
+            <Link to="/design">
+              <Button variant="ghost" size="sm">
+                Design
+              </Button>
+            </Link>
+          </nav>
         </div>
         
         <div className="flex items-center gap-4">

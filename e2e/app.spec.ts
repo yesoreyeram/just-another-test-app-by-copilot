@@ -10,8 +10,8 @@ test.describe('Hello World App', () => {
     // Check for Explore more button
     await expect(page.getByRole('button', { name: /explore more/i })).toBeVisible()
     
-    // Check for header with Hello title
-    await expect(page.getByRole('heading', { name: 'Hello' })).toBeVisible()
+    // Check for header with Hello link
+    await expect(page.getByRole('link', { name: 'Hello' })).toBeVisible()
   })
 
   test('theme switching works', async ({ page }) => {
@@ -38,5 +38,38 @@ test.describe('Hello World App', () => {
     // Verify dark mode was applied
     const html = page.locator('html')
     await expect(html).toHaveClass(/dark/)
+  })
+
+  test('navigates to design system page', async ({ page }) => {
+    await page.goto('/')
+
+    // Click the Design link
+    await page.getByRole('button', { name: /^design$/i }).click()
+    
+    // Verify we're on the design page
+    await expect(page.getByRole('heading', { name: 'Design System', level: 1 })).toBeVisible()
+    await expect(page.getByText('A comprehensive guide to the design tokens')).toBeVisible()
+  })
+
+  test('navigates back to home from design page', async ({ page }) => {
+    await page.goto('/design')
+
+    // Click the Hello link to go back home
+    await page.getByRole('link', { name: 'Hello' }).click()
+    
+    // Verify we're back on home page
+    await expect(page.getByRole('heading', { name: 'Hello World' })).toBeVisible()
+  })
+
+  test('design system page shows all sections', async ({ page }) => {
+    await page.goto('/design')
+
+    // Check for main sections
+    await expect(page.getByRole('heading', { name: 'Colors', level: 2 })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Typography', level: 2 })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Spacing', level: 2 })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Border Radius', level: 2 })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Shadows', level: 2 })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Components', level: 2 })).toBeVisible()
   })
 })
