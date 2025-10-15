@@ -477,6 +477,37 @@ export function DesignSystem() {
             </div>
           </div>
 
+          {/* Label with Tooltip */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Label with Tooltip</h3>
+            <div className="space-y-4 max-w-md">
+              <div className="space-y-2">
+                <Label htmlFor="username" tooltip="Enter your unique username">
+                  Username
+                </Label>
+                <Input id="username" type="text" placeholder="Enter username" />
+              </div>
+              <div className="space-y-2">
+                <Label 
+                  htmlFor="api-key" 
+                  tooltip={
+                    <div>
+                      <p className="font-semibold">API Key</p>
+                      <p className="text-xs">You can find your API key in your account settings</p>
+                    </div>
+                  }
+                >
+                  API Key
+                </Label>
+                <Input id="api-key" type="password" placeholder="Enter API key" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="no-tooltip">Label without tooltip</Label>
+                <Input id="no-tooltip" type="text" placeholder="Standard label" />
+              </div>
+            </div>
+          </div>
+
           {/* Color Picker */}
           <div className="space-y-4">
             <h3 className="text-xl font-semibold">Color Picker</h3>
