@@ -1,5 +1,11 @@
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
 import { designTokens } from '@/lib/design-tokens'
 
 export function DesignSystem() {
@@ -192,6 +198,109 @@ export function DesignSystem() {
             <div className="flex items-center gap-4">
               <Switch />
               <Switch defaultChecked />
+            </div>
+          </div>
+
+          {/* Input */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Input</h3>
+            <div className="space-y-4 max-w-md">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" type="email" placeholder="Email" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input id="password" type="password" placeholder="Password" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="disabled">Disabled</Label>
+                <Input id="disabled" placeholder="Disabled input" disabled />
+              </div>
+            </div>
+          </div>
+
+          {/* TextArea */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">TextArea</h3>
+            <div className="space-y-4 max-w-md">
+              <div className="space-y-2">
+                <Label htmlFor="message">Message</Label>
+                <Textarea id="message" placeholder="Type your message here..." />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="disabled-textarea">Disabled</Label>
+                <Textarea id="disabled-textarea" placeholder="Disabled textarea" disabled />
+              </div>
+            </div>
+          </div>
+
+          {/* Select/DropDown */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Select / DropDown</h3>
+            <div className="space-y-4 max-w-md">
+              <div className="space-y-2">
+                <Label htmlFor="select-demo">Framework</Label>
+                <Select>
+                  <SelectTrigger id="select-demo">
+                    <SelectValue placeholder="Select a framework" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="react">React</SelectItem>
+                    <SelectItem value="vue">Vue</SelectItem>
+                    <SelectItem value="angular">Angular</SelectItem>
+                    <SelectItem value="svelte">Svelte</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+
+          {/* Checkbox */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Checkbox</h3>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <Label htmlFor="terms" className="text-sm font-normal">
+                  Accept terms and conditions
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="checked" defaultChecked />
+                <Label htmlFor="checked" className="text-sm font-normal">
+                  Checked by default
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="disabled" disabled />
+                <Label htmlFor="disabled" className="text-sm font-normal">
+                  Disabled
+                </Label>
+              </div>
+            </div>
+          </div>
+
+          {/* Separator/Line */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Separator / Line</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Horizontal</p>
+                <div>
+                  <p className="text-sm">Above separator</p>
+                  <Separator className="my-4" />
+                  <p className="text-sm">Below separator</p>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Vertical</p>
+                <div className="flex h-20 items-center space-x-4">
+                  <p className="text-sm">Left</p>
+                  <Separator orientation="vertical" />
+                  <p className="text-sm">Right</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
