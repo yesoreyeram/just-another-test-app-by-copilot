@@ -82,6 +82,76 @@ export function DesignSystem() {
           </div>
         </section>
 
+        {/* Color Palettes */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="text-3xl font-semibold mb-2">Color Palettes</h2>
+            <p className="text-muted-foreground">
+              Pre-defined color palettes for consistent color usage across the application.
+            </p>
+          </div>
+
+          {/* Main Palette */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Main Palette</h3>
+            <p className="text-sm text-muted-foreground">A vibrant collection of 12 colors for general use.</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {Object.entries(designTokens.palettes.main).map(([name, value]) => (
+                <div key={name} className="space-y-2">
+                  <div 
+                    className="h-20 rounded-lg border shadow-sm"
+                    style={{ backgroundColor: value }}
+                  />
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium capitalize">{name}</p>
+                    <p className="text-xs text-muted-foreground font-mono">{value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Monochrome Palette */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Monochrome Palette</h3>
+            <p className="text-sm text-muted-foreground">12 shades of gray from white to black for neutral tones.</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {Object.entries(designTokens.palettes.monochrome).map(([name, value]) => (
+                <div key={name} className="space-y-2">
+                  <div 
+                    className="h-20 rounded-lg border shadow-sm"
+                    style={{ backgroundColor: value }}
+                  />
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium capitalize">{name}</p>
+                    <p className="text-xs text-muted-foreground font-mono">{value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Primary Color Variants */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Primary Color Variants</h3>
+            <p className="text-sm text-muted-foreground">12 shades of the primary color for depth and hierarchy.</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {Object.entries(designTokens.palettes.primary).map(([name, value]) => (
+                <div key={name} className="space-y-2">
+                  <div 
+                    className="h-20 rounded-lg border shadow-sm"
+                    style={{ backgroundColor: value }}
+                  />
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium capitalize">{name}</p>
+                    <p className="text-xs text-muted-foreground font-mono">{value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Typography */}
         <section className="space-y-6">
           <div>
