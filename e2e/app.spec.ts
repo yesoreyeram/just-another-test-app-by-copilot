@@ -28,6 +28,60 @@ test.describe('Hello World App', () => {
     await expect(html).toHaveClass(/theme-sea/)
   })
 
+  test('new themes are available', async ({ page }) => {
+    await page.goto('/')
+
+    // Click the theme selector button
+    await page.getByRole('button', { name: /select theme/i }).click()
+    
+    // Verify new themes are in the list
+    await expect(page.getByRole('menuitemradio', { name: 'Halloween' })).toBeVisible()
+    await expect(page.getByRole('menuitemradio', { name: 'Diwali' })).toBeVisible()
+    await expect(page.getByRole('menuitemradio', { name: "Valentine's Day" })).toBeVisible()
+  })
+
+  test('halloween theme switching works', async ({ page }) => {
+    await page.goto('/')
+
+    // Click the theme selector button
+    await page.getByRole('button', { name: /select theme/i }).click()
+    
+    // Select Halloween theme
+    await page.getByRole('menuitemradio', { name: 'Halloween' }).click()
+    
+    // Verify theme was applied (check for theme class)
+    const html = page.locator('html')
+    await expect(html).toHaveClass(/theme-halloween/)
+  })
+
+  test('diwali theme switching works', async ({ page }) => {
+    await page.goto('/')
+
+    // Click the theme selector button
+    await page.getByRole('button', { name: /select theme/i }).click()
+    
+    // Select Diwali theme
+    await page.getByRole('menuitemradio', { name: 'Diwali' }).click()
+    
+    // Verify theme was applied (check for theme class)
+    const html = page.locator('html')
+    await expect(html).toHaveClass(/theme-diwali/)
+  })
+
+  test('valentine theme switching works', async ({ page }) => {
+    await page.goto('/')
+
+    // Click the theme selector button
+    await page.getByRole('button', { name: /select theme/i }).click()
+    
+    // Select Valentine's Day theme
+    await page.getByRole('menuitemradio', { name: "Valentine's Day" }).click()
+    
+    // Verify theme was applied (check for theme class)
+    const html = page.locator('html')
+    await expect(html).toHaveClass(/theme-valentine/)
+  })
+
   test('dark mode toggle works', async ({ page }) => {
     await page.goto('/')
 

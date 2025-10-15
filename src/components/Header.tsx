@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Switch } from '@/components/ui/switch'
 
-type Theme = 'sky' | 'sea' | 'forest' | 'gold' | 'pink' | 'chocolate'
+type Theme = 'sky' | 'sea' | 'forest' | 'gold' | 'pink' | 'chocolate' | 'halloween' | 'diwali' | 'valentine'
 
 const themes = [
   { value: 'sky', label: 'Sky' },
@@ -22,6 +22,9 @@ const themes = [
   { value: 'gold', label: 'Gold' },
   { value: 'pink', label: 'Pink' },
   { value: 'chocolate', label: 'Chocolate' },
+  { value: 'halloween', label: 'Halloween' },
+  { value: 'diwali', label: 'Diwali' },
+  { value: 'valentine', label: "Valentine's Day" },
 ] as const
 
 export function Header() {
