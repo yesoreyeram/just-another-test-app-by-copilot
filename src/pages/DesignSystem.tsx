@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Input } from '@/components/ui/input'
@@ -22,6 +22,37 @@ import { DateTimePicker } from '@/components/ui/datetime-picker'
 import { TimeRangePicker } from '@/components/ui/time-range-picker'
 import type { TimeRange } from '@/components/ui/time-range-picker'
 import { designTokens } from '@/lib/design-tokens'
+
+// Utility function to generate primary color variants from the current theme
+function generatePrimaryColorVariants() {
+  // Get the computed --primary CSS variable value
+  const primaryHSL = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim()
+  
+  if (!primaryHSL) {
+    return {}
+  }
+  
+  // Parse HSL values (format: "hue saturation% lightness%")
+  const [hue, saturation, lightness] = primaryHSL.split(' ').map(v => parseFloat(v))
+  
+  // Generate variants by adjusting lightness
+  const variants: Record<string, string> = {
+    50: `hsl(${hue}, ${saturation}%, 95%)`,
+    100: `hsl(${hue}, ${saturation}%, 90%)`,
+    200: `hsl(${hue}, ${saturation}%, 80%)`,
+    300: `hsl(${hue}, ${saturation}%, 70%)`,
+    400: `hsl(${hue}, ${saturation}%, 60%)`,
+    500: `hsl(${hue}, ${saturation}%, ${lightness}%)`,
+    600: `hsl(${hue}, ${saturation}%, ${Math.max(lightness - 10, 10)}%)`,
+    700: `hsl(${hue}, ${saturation}%, ${Math.max(lightness - 20, 10)}%)`,
+    800: `hsl(${hue}, ${saturation}%, ${Math.max(lightness - 30, 5)}%)`,
+    900: `hsl(${hue}, ${saturation}%, ${Math.max(lightness - 40, 5)}%)`,
+    950: `hsl(${hue}, ${saturation}%, ${Math.max(lightness - 45, 3)}%)`,
+    default: `hsl(${hue}, ${saturation}%, ${lightness}%)`,
+  }
+  
+  return variants
+}
 
 // Demo component for DatePicker with state
 function DatePickerDemo() {
@@ -144,6 +175,26 @@ function MultiSelectDemo() {
 }
 
 export function DesignSystem() {
+  // Generate primary color variants based on current theme
+  const [primaryColorVariants, setPrimaryColorVariants] = useState<Record<string, string>>({})
+  
+  useEffect(() => {
+    // Generate variants when component mounts or theme changes
+    setPrimaryColorVariants(generatePrimaryColorVariants())
+    
+    // Optional: Add a MutationObserver to detect theme changes
+    const observer = new MutationObserver(() => {
+      setPrimaryColorVariants(generatePrimaryColorVariants())
+    })
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    })
+    
+    return () => observer.disconnect()
+  }, [])
+  
   return (
     <main className="flex-1 p-8">
       <div className="max-w-6xl mx-auto space-y-12">
@@ -233,7 +284,7 @@ export function DesignSystem() {
             <h3 className="text-xl font-semibold">Primary Color Variants</h3>
             <p className="text-sm text-muted-foreground">12 shades of the primary color for depth and hierarchy.</p>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {Object.entries(designTokens.palettes.primary).map(([name, value]) => (
+              {Object.entries(primaryColorVariants).map(([name, value]) => (
                 <div key={name} className="space-y-2">
                   <div 
                     className="h-20 rounded-lg border shadow-sm"
