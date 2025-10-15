@@ -1,8 +1,12 @@
 import { ComponentPage } from '@/components/ComponentPage'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
+import { useState } from 'react'
+import { Card } from '@/components/ui/card'
 
 export function SwitchPage() {
+  const [checked, setChecked] = useState(false)
+
   return (
     <ComponentPage
       title="Switch"
@@ -20,6 +24,31 @@ import { Label } from '@/components/ui/label'
   <Switch id="airplane-mode" />
   <Label htmlFor="airplane-mode">Airplane Mode</Label>
 </div>`}
+      playground={
+        <div className="w-full space-y-6">
+          <div className="border rounded-lg p-8 flex items-center justify-center bg-muted/30">
+            <div className="flex items-center space-x-2">
+              <Switch
+                id="playground-switch"
+                checked={checked}
+                onCheckedChange={setChecked}
+              />
+              <Label htmlFor="playground-switch">
+                {checked ? 'On' : 'Off'}
+              </Label>
+            </div>
+          </div>
+          <Card className="p-4 bg-muted">
+            <pre className="text-sm overflow-x-auto">
+              <code>{`<Switch
+  checked={${checked}}
+  onCheckedChange={setChecked}
+/>
+// Current state: ${checked ? 'On' : 'Off'}`}</code>
+            </pre>
+          </Card>
+        </div>
+      }
       variants={[
         {
           title: 'States',

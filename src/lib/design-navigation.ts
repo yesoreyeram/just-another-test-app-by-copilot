@@ -21,6 +21,7 @@ export const designNavigation: NavigationItem[] = [
   },
   {
     title: 'Components',
+    path: '/design/components',
     children: [
       { title: 'Accordion', path: '/design/components/accordion' },
       { title: 'Alert', path: '/design/components/alert' },

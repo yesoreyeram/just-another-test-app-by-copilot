@@ -19,20 +19,40 @@ function SidebarItem({ item, level = 0 }: SidebarItemProps) {
   if (hasChildren) {
     return (
       <div className="mb-1">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={cn(
-            'w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-md transition-colors',
-            'hover:bg-accent hover:text-accent-foreground',
-            level === 0 ? 'text-foreground' : 'text-muted-foreground'
+        <div className="w-full flex items-center rounded-md transition-colors hover:bg-accent hover:text-accent-foreground">
+          {item.path ? (
+            <Link
+              to={item.path}
+              className={cn(
+                'flex-1 px-3 py-2 text-sm font-medium',
+                level === 0 ? 'text-foreground' : 'text-muted-foreground',
+                isActive && 'bg-primary text-primary-foreground'
+              )}
+              style={{ paddingLeft: `${(level + 1) * 12}px` }}
+            >
+              {item.title}
+            </Link>
+          ) : (
+            <span
+              className={cn(
+                'flex-1 px-3 py-2 text-sm font-medium',
+                level === 0 ? 'text-foreground' : 'text-muted-foreground'
+              )}
+              style={{ paddingLeft: `${(level + 1) * 12}px` }}
+            >
+              {item.title}
+            </span>
           )}
-          style={{ paddingLeft: `${(level + 1) * 12}px` }}
-        >
-          <span>{item.title}</span>
-          <ChevronDown
-            className={cn('h-4 w-4 transition-transform', isOpen && 'transform rotate-180')}
-          />
-        </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="px-3 py-2"
+            aria-label={`${isOpen ? 'Collapse' : 'Expand'} ${item.title}`}
+          >
+            <ChevronDown
+              className={cn('h-4 w-4 transition-transform', isOpen && 'transform rotate-180')}
+            />
+          </button>
+        </div>
         {isOpen && item.children && (
           <div className="mt-1">
             {item.children.map((child, index) => (
