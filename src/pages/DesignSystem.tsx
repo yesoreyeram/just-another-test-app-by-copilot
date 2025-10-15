@@ -16,7 +16,25 @@ import { Spacer, Box } from '@/components/ui/spacing'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { Avatar } from '@/components/ui/avatar'
 import { ColorPicker } from '@/components/ui/color-picker'
+import { DatePicker } from '@/components/ui/date-picker'
 import { designTokens } from '@/lib/design-tokens'
+
+// Demo component for DatePicker with state
+function DatePickerDemo() {
+  const [date, setDate] = useState('')
+  
+  return (
+    <div className="space-y-2">
+      <Label htmlFor="date-picker">Pick a date</Label>
+      <DatePicker id="date-picker" value={date} onChange={setDate} />
+      {date && (
+        <p className="text-sm text-muted-foreground">
+          Selected date: <span className="font-mono font-semibold">{date}</span>
+        </p>
+      )}
+    </div>
+  )
+}
 
 // Demo component for ColorPicker with state
 function ColorPickerDemo() {
@@ -360,6 +378,22 @@ export function DesignSystem() {
               <div className="space-y-2">
                 <Label htmlFor="disabled-color">Disabled</Label>
                 <ColorPicker id="disabled-color" value="#6b7280" disabled />
+              </div>
+            </div>
+          </div>
+
+          {/* Date Picker */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Date Picker</h3>
+            <div className="space-y-4 max-w-md">
+              <DatePickerDemo />
+              <div className="space-y-2">
+                <Label htmlFor="date-with-value">With initial value</Label>
+                <DatePicker id="date-with-value" value="2024-01-15" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="disabled-date">Disabled</Label>
+                <DatePicker id="disabled-date" value="2024-12-25" disabled />
               </div>
             </div>
           </div>
