@@ -1,12 +1,52 @@
-import { Moon, Sun } from 'lucide-react'
+import { Moon, Sun, Palette } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTheme } from '@/contexts/ThemeContext'
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Switch } from '@/components/ui/switch'
 import { Breadcrumbs, type BreadcrumbItem } from '@/components/ui/breadcrumbs'
 
+type AccentColor = 'tomato' | 'red' | 'ruby' | 'crimson' | 'pink' | 'plum' | 'purple' | 'violet' | 'iris' | 'indigo' | 'blue' | 'cyan' | 'teal' | 'jade' | 'green' | 'grass' | 'brown' | 'orange' | 'sky' | 'mint' | 'lime' | 'yellow' | 'amber' | 'gold' | 'bronze' | 'gray'
+
+const accentColors = [
+  { value: 'tomato', label: 'Tomato' },
+  { value: 'red', label: 'Red' },
+  { value: 'ruby', label: 'Ruby' },
+  { value: 'crimson', label: 'Crimson' },
+  { value: 'pink', label: 'Pink' },
+  { value: 'plum', label: 'Plum' },
+  { value: 'purple', label: 'Purple' },
+  { value: 'violet', label: 'Violet' },
+  { value: 'iris', label: 'Iris' },
+  { value: 'indigo', label: 'Indigo' },
+  { value: 'blue', label: 'Blue' },
+  { value: 'cyan', label: 'Cyan' },
+  { value: 'teal', label: 'Teal' },
+  { value: 'jade', label: 'Jade' },
+  { value: 'green', label: 'Green' },
+  { value: 'grass', label: 'Grass' },
+  { value: 'brown', label: 'Brown' },
+  { value: 'orange', label: 'Orange' },
+  { value: 'sky', label: 'Sky' },
+  { value: 'mint', label: 'Mint' },
+  { value: 'lime', label: 'Lime' },
+  { value: 'yellow', label: 'Yellow' },
+  { value: 'amber', label: 'Amber' },
+  { value: 'gold', label: 'Gold' },
+  { value: 'bronze', label: 'Bronze' },
+  { value: 'gray', label: 'Gray' },
+] as const
+
 export function Header() {
-  const { appearance, toggleAppearance } = useTheme()
+  const { appearance, accentColor, setAccentColor, toggleAppearance } = useTheme()
   const location = useLocation()
 
   // Determine the current effective appearance
@@ -87,6 +127,26 @@ export function Header() {
             />
             <Moon className="h-4 w-4" />
           </div>
+
+          {/* Accent Color Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="icon" aria-label="Select accent color">
+                <Palette className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Accent Color</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup value={accentColor} onValueChange={(value) => setAccentColor(value as AccentColor)}>
+                {accentColors.map((color) => (
+                  <DropdownMenuRadioItem key={color.value} value={color.value}>
+                    {color.label}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>

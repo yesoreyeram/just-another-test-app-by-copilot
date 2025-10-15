@@ -2,10 +2,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
 type ThemeAppearance = 'light' | 'dark' | 'inherit'
+type AccentColor = 'tomato' | 'red' | 'ruby' | 'crimson' | 'pink' | 'plum' | 'purple' | 'violet' | 'iris' | 'indigo' | 'blue' | 'cyan' | 'teal' | 'jade' | 'green' | 'grass' | 'brown' | 'orange' | 'sky' | 'mint' | 'lime' | 'yellow' | 'amber' | 'gold' | 'bronze' | 'gray'
 
 interface ThemeContextType {
   appearance: ThemeAppearance
+  accentColor: AccentColor
   setAppearance: (appearance: ThemeAppearance) => void
+  setAccentColor: (accentColor: AccentColor) => void
   toggleAppearance: () => void
 }
 
@@ -17,9 +20,18 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return (stored as ThemeAppearance) || 'inherit'
   })
 
+  const [accentColor, setAccentColor] = useState<AccentColor>(() => {
+    const stored = localStorage.getItem('accentColor')
+    return (stored as AccentColor) || 'blue'
+  })
+
   useEffect(() => {
     localStorage.setItem('appearance', appearance)
   }, [appearance])
+
+  useEffect(() => {
+    localStorage.setItem('accentColor', accentColor)
+  }, [accentColor])
 
   const toggleAppearance = () => {
     setAppearance((prev) => {
@@ -36,7 +48,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <ThemeContext.Provider value={{ appearance, setAppearance, toggleAppearance }}>
+    <ThemeContext.Provider value={{ appearance, accentColor, setAppearance, setAccentColor, toggleAppearance }}>
       {children}
     </ThemeContext.Provider>
   )

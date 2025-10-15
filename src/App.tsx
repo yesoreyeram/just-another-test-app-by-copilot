@@ -117,10 +117,10 @@ function AppContent() {
 }
 
 function App() {
-  const { appearance } = useTheme()
+  const { appearance, accentColor } = useTheme()
   
   return (
-    <Theme appearance={appearance}>
+    <Theme appearance={appearance} accentColor={accentColor}>
       <AppContent />
     </Theme>
   )
