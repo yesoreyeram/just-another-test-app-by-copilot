@@ -14,6 +14,7 @@ import { MultiSelect } from '@/components/ui/multi-select'
 import { Grid, Flex } from '@/components/ui/layout'
 import { Spacer, Box } from '@/components/ui/spacing'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
+import { Avatar } from '@/components/ui/avatar'
 import { designTokens } from '@/lib/design-tokens'
 
 // Demo component for MultiSelect with state
@@ -529,6 +530,48 @@ export function DesignSystem() {
                     <Button>Confirm</Button>
                   </CardFooter>
                 </Card>
+              </div>
+            </div>
+          </div>
+
+          {/* Avatar */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Avatar</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Sizes</p>
+                <div className="flex items-center gap-4">
+                  <Avatar size="sm">SM</Avatar>
+                  <Avatar size="md">MD</Avatar>
+                  <Avatar size="lg">LG</Avatar>
+                  <Avatar size="xl">XL</Avatar>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">With initials</p>
+                <div className="flex items-center gap-4">
+                  <Avatar fallback="JD" />
+                  <Avatar fallback="AB" />
+                  <Avatar fallback="MK" />
+                  <Avatar fallback="SL" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">With images</p>
+                <div className="flex items-center gap-4">
+                  <Avatar src="https://i.pravatar.cc/150?img=1" alt="User 1" />
+                  <Avatar src="https://i.pravatar.cc/150?img=2" alt="User 2" />
+                  <Avatar src="https://i.pravatar.cc/150?img=3" alt="User 3" />
+                  <Avatar src="https://i.pravatar.cc/150?img=4" alt="User 4" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Fallback behavior</p>
+                <div className="flex items-center gap-4">
+                  <Avatar src="invalid-url" fallback="FB" alt="Fallback" />
+                  <Avatar alt="Alice" />
+                  <Avatar>?</Avatar>
+                </div>
               </div>
             </div>
           </div>
