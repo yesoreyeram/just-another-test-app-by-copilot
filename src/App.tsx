@@ -8,6 +8,7 @@ import { ButtonPage } from '@/pages/design/components/ButtonPage'
 import { BadgePage } from '@/pages/design/components/BadgePage'
 import { AlertPage } from '@/pages/design/components/AlertPage'
 import { ProgressPage } from '@/pages/design/components/ProgressPage'
+import { ScrollAreaPage } from '@/pages/design/components/ScrollAreaPage'
 import { CardPage } from '@/pages/design/components/CardPage'
 import { AccordionPage } from '@/pages/design/components/AccordionPage'
 import { AspectRatioPage } from '@/pages/design/components/AspectRatioPage'
@@ -40,6 +41,13 @@ import { TimeRangePickerPage } from '@/pages/design/components/TimeRangePickerPa
 import { ToastPage } from '@/pages/design/components/ToastPage'
 import { TooltipPage } from '@/pages/design/components/TooltipPage'
 import { ColorsPage } from '@/pages/design/tokens/ColorsPage'
+import { TypographyPage } from '@/pages/design/tokens/TypographyPage'
+import { SpacingPage } from '@/pages/design/tokens/SpacingPage'
+import { BorderRadiusPage } from '@/pages/design/tokens/BorderRadiusPage'
+import { ShadowsPage } from '@/pages/design/tokens/ShadowsPage'
+import { GridPage } from '@/pages/design/layout/GridPage'
+import { FlexPage } from '@/pages/design/layout/FlexPage'
+import { LayoutSpacingPage } from '@/pages/design/layout/LayoutSpacingPage'
 import { Toaster } from '@/components/ui/toaster'
 
 function App() {
@@ -52,6 +60,13 @@ function App() {
           <Route path="/design" element={<DesignLayout />}>
             <Route index element={<DesignOverview />} />
             <Route path="tokens/colors" element={<ColorsPage />} />
+            <Route path="tokens/typography" element={<TypographyPage />} />
+            <Route path="tokens/spacing" element={<SpacingPage />} />
+            <Route path="tokens/border-radius" element={<BorderRadiusPage />} />
+            <Route path="tokens/shadows" element={<ShadowsPage />} />
+            <Route path="layout/grid" element={<GridPage />} />
+            <Route path="layout/flex" element={<FlexPage />} />
+            <Route path="layout/spacing" element={<LayoutSpacingPage />} />
             <Route path="components/accordion" element={<AccordionPage />} />
             <Route path="components/alert" element={<AlertPage />} />
             <Route path="components/aspect-ratio" element={<AspectRatioPage />} />
@@ -74,6 +89,7 @@ function App() {
             <Route path="components/multi-select" element={<MultiSelectPage />} />
             <Route path="components/multi-step-range-slider" element={<MultiStepRangeSliderPage />} />
             <Route path="components/progress" element={<ProgressPage />} />
+            <Route path="components/scroll-area" element={<ScrollAreaPage />} />
             <Route path="components/section" element={<SectionPage />} />
             <Route path="components/section-divider" element={<SectionDividerPage />} />
             <Route path="components/select" element={<SelectPage />} />

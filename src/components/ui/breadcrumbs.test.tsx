@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
 import { Breadcrumbs } from './breadcrumbs'
 
 describe('Breadcrumbs', () => {
@@ -9,7 +10,11 @@ describe('Breadcrumbs', () => {
       { label: 'Products', href: '/products' },
       { label: 'Details' },
     ]
-    render(<Breadcrumbs items={items} />)
+    render(
+      <BrowserRouter>
+        <Breadcrumbs items={items} />
+      </BrowserRouter>
+    )
     expect(screen.getByText('Home')).toBeInTheDocument()
     expect(screen.getByText('Products')).toBeInTheDocument()
     expect(screen.getByText('Details')).toBeInTheDocument()
@@ -20,7 +25,11 @@ describe('Breadcrumbs', () => {
       { label: 'Home', href: '/' },
       { label: 'About', href: '/about' },
     ]
-    render(<Breadcrumbs items={items} />)
+    render(
+      <BrowserRouter>
+        <Breadcrumbs items={items} />
+      </BrowserRouter>
+    )
     const homeLink = screen.getByText('Home') as HTMLAnchorElement
     expect(homeLink.href).toContain('/')
   })
@@ -30,7 +39,11 @@ describe('Breadcrumbs', () => {
       { label: 'Home', href: '/' },
       { label: 'Current' },
     ]
-    render(<Breadcrumbs items={items} />)
+    render(
+      <BrowserRouter>
+        <Breadcrumbs items={items} />
+      </BrowserRouter>
+    )
     const currentItem = screen.getByText('Current')
     expect(currentItem).toHaveAttribute('aria-current', 'page')
   })
@@ -40,7 +53,11 @@ describe('Breadcrumbs', () => {
       { label: 'Home', href: '/' },
       { label: 'Products' },
     ]
-    render(<Breadcrumbs items={items} separator={<span>/</span>} />)
+    render(
+      <BrowserRouter>
+        <Breadcrumbs items={items} separator={<span>/</span>} />
+      </BrowserRouter>
+    )
     expect(screen.getByText('/')).toBeInTheDocument()
   })
 })

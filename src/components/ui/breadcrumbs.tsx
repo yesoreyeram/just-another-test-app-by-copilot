@@ -1,5 +1,6 @@
 import * as React from "react"
 import { ChevronRight } from "lucide-react"
+import { Link } from "react-router-dom"
 import { cn } from "@/lib/utils"
 
 export interface BreadcrumbItem {
@@ -31,8 +32,8 @@ const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
             return (
               <li key={index} className="flex items-center space-x-1">
                 {item.href ? (
-                  <a
-                    href={item.href}
+                  <Link
+                    to={item.href}
                     className={cn(
                       "hover:text-foreground transition-colors",
                       isLast
@@ -42,7 +43,7 @@ const Breadcrumbs = React.forwardRef<HTMLElement, BreadcrumbsProps>(
                     aria-current={isLast ? "page" : undefined}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ) : item.onClick ? (
                   <button
                     onClick={item.onClick}
