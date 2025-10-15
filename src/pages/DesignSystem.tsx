@@ -13,6 +13,7 @@ import { Tag, Tags } from '@/components/ui/tag'
 import { MultiSelect } from '@/components/ui/multi-select'
 import { Grid, Flex } from '@/components/ui/layout'
 import { Spacer, Box } from '@/components/ui/spacing'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
 import { designTokens } from '@/lib/design-tokens'
 
 // Demo component for MultiSelect with state
@@ -479,6 +480,56 @@ export function DesignSystem() {
             <h3 className="text-xl font-semibold">Multi-Select Dropdown</h3>
             <div className="space-y-4 max-w-md">
               <MultiSelectDemo />
+            </div>
+          </div>
+
+          {/* Card */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Card</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Default card</p>
+                <Card className="max-w-md">
+                  <CardHeader>
+                    <CardTitle>Card Title</CardTitle>
+                    <CardDescription>Card description goes here</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>This is the card content area where you can place any content.</p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button>Action</Button>
+                  </CardFooter>
+                </Card>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Outline variant</p>
+                <Card variant="outline" className="max-w-md">
+                  <CardHeader>
+                    <CardTitle>Outline Card</CardTitle>
+                    <CardDescription>A card with transparent background</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>This card has a transparent background with just a border.</p>
+                  </CardContent>
+                </Card>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Elevated variant</p>
+                <Card variant="elevated" className="max-w-md">
+                  <CardHeader>
+                    <CardTitle>Elevated Card</CardTitle>
+                    <CardDescription>A card with shadow elevation</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p>This card has a shadow to create depth and elevation.</p>
+                  </CardContent>
+                  <CardFooter className="gap-2">
+                    <Button variant="outline">Cancel</Button>
+                    <Button>Confirm</Button>
+                  </CardFooter>
+                </Card>
+              </div>
             </div>
           </div>
         </section>
