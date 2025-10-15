@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Header } from '@/components/Header'
 import { Home } from '@/pages/Home'
-import { DesignSystem } from '@/pages/DesignSystem'
+import { DesignLayout } from '@/pages/DesignLayout'
+import { DesignOverview } from '@/pages/design/DesignOverview'
+import { SpinnerPage } from '@/pages/design/components/SpinnerPage'
 import { Toaster } from '@/components/ui/toaster'
 
 function App() {
@@ -11,7 +13,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/design" element={<DesignSystem />} />
+          <Route path="/design" element={<DesignLayout />}>
+            <Route index element={<DesignOverview />} />
+            <Route path="components/spinner" element={<SpinnerPage />} />
+          </Route>
         </Routes>
         <Toaster />
       </div>
