@@ -808,7 +808,7 @@ export function DesignSystem() {
           <div>
             <h2 className="text-3xl font-semibold mb-2">Theme System</h2>
             <p className="text-muted-foreground">
-              Our application supports 6 different color themes (Sky, Sea, Forest, Gold, Pink, Chocolate) 
+              Our application supports 9 different color themes (Sky, Sea, Forest, Gold, Pink, Chocolate, Halloween, Diwali, Valentine's Day) 
               and both light and dark modes. Use the theme selector in the header to try them out!
             </p>
           </div>

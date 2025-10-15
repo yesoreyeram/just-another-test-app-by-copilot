@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-type Theme = 'sky' | 'sea' | 'forest' | 'gold' | 'pink' | 'chocolate'
+type Theme = 'sky' | 'sea' | 'forest' | 'gold' | 'pink' | 'chocolate' | 'halloween' | 'diwali' | 'valentine'
 type Mode = 'light' | 'dark'
 
 interface ThemeContextType {
@@ -32,7 +32,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const root = document.documentElement
     
     // Remove all theme classes
-    root.classList.remove('theme-sky', 'theme-sea', 'theme-forest', 'theme-gold', 'theme-pink', 'theme-chocolate')
+    root.classList.remove('theme-sky', 'theme-sea', 'theme-forest', 'theme-gold', 'theme-pink', 'theme-chocolate', 'theme-halloween', 'theme-diwali', 'theme-valentine')
     root.classList.remove('dark', 'light')
     
     // Add current theme and mode

@@ -120,6 +120,42 @@
     --foreground: 30 30% 97%;
     --primary: 30 50% 50%;
   }
+
+  .theme-halloween {
+    --background: 30 100% 97%;
+    --foreground: 30 50% 10%;
+    --primary: 30 100% 50%;
+  }
+
+  .dark.theme-halloween {
+    --background: 30 50% 8%;
+    --foreground: 30 100% 97%;
+    --primary: 30 100% 60%;
+  }
+
+  .theme-diwali {
+    --background: 40 100% 97%;
+    --foreground: 40 50% 10%;
+    --primary: 40 100% 50%;
+  }
+
+  .dark.theme-diwali {
+    --background: 40 30% 10%;
+    --foreground: 40 100% 97%;
+    --primary: 40 100% 60%;
+  }
+
+  .theme-valentine {
+    --background: 350 100% 97%;
+    --foreground: 350 50% 10%;
+    --primary: 350 100% 60%;
+  }
+
+  .dark.theme-valentine {
+    --background: 350 30% 10%;
+    --foreground: 350 100% 97%;
+    --primary: 350 100% 70%;
+  }
 }
 
 @layer base {
