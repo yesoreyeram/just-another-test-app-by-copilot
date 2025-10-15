@@ -35,7 +35,7 @@ export function Header() {
   // Generate breadcrumbs based on current path
   const getBreadcrumbs = (): BreadcrumbItem[] => {
     const path = location.pathname
-    const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }]
+    const breadcrumbs: BreadcrumbItem[] = []
 
     if (path.startsWith('/design')) {
       breadcrumbs.push({ label: 'Design', href: '/design' })
@@ -52,7 +52,7 @@ export function Header() {
             breadcrumbs.push({ label: pageTitle })
           }
         } else if (section === 'components') {
-          breadcrumbs.push({ label: 'Components', href: '/design' })
+          breadcrumbs.push({ label: 'Components', href: '/design/components' })
           if (pageName) {
             const pageTitle = pageName.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
             breadcrumbs.push({ label: pageTitle })
@@ -71,7 +71,7 @@ export function Header() {
   }
 
   const breadcrumbs = getBreadcrumbs()
-  const showBreadcrumbs = location.pathname.startsWith('/design') && breadcrumbs.length > 2
+  const showBreadcrumbs = location.pathname.startsWith('/design') && breadcrumbs.length > 1
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

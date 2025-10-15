@@ -3,6 +3,7 @@ import { Header } from '@/components/Header'
 import { Home } from '@/pages/Home'
 import { DesignLayout } from '@/pages/DesignLayout'
 import { DesignOverview } from '@/pages/design/DesignOverview'
+import { ComponentsOverview } from '@/pages/design/components/ComponentsOverview'
 import { SpinnerPage } from '@/pages/design/components/SpinnerPage'
 import { ButtonPage } from '@/pages/design/components/ButtonPage'
 import { BadgePage } from '@/pages/design/components/BadgePage'
@@ -59,6 +60,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/design" element={<DesignLayout />}>
             <Route index element={<DesignOverview />} />
+            <Route path="components" element={<ComponentsOverview />} />
             <Route path="tokens/colors" element={<ColorsPage />} />
             <Route path="tokens/typography" element={<TypographyPage />} />
             <Route path="tokens/spacing" element={<SpacingPage />} />
