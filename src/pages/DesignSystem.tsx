@@ -19,6 +19,8 @@ import { ColorPicker } from '@/components/ui/color-picker'
 import { DatePicker } from '@/components/ui/date-picker'
 import { TimePicker } from '@/components/ui/time-picker'
 import { DateTimePicker } from '@/components/ui/datetime-picker'
+import { TimeRangePicker } from '@/components/ui/time-range-picker'
+import type { TimeRange } from '@/components/ui/time-range-picker'
 import { designTokens } from '@/lib/design-tokens'
 
 // Demo component for DatePicker with state
@@ -55,7 +57,7 @@ function TimePickerDemo() {
   )
 }
 
-// Demo component for DateTimePicker with state
+// Demo component for DateTimePickerDemo with state
 function DateTimePickerDemo() {
   const [datetime, setDatetime] = useState('')
   
@@ -66,6 +68,23 @@ function DateTimePickerDemo() {
       {datetime && (
         <p className="text-sm text-muted-foreground">
           Selected datetime: <span className="font-mono font-semibold">{datetime}</span>
+        </p>
+      )}
+    </div>
+  )
+}
+
+// Demo component for TimeRangePicker with state
+function TimeRangePickerDemo() {
+  const [range, setRange] = useState<TimeRange>({ from: '', to: '' })
+  
+  return (
+    <div className="space-y-2">
+      <Label>Pick a time range</Label>
+      <TimeRangePicker value={range} onChange={setRange} />
+      {(range.from || range.to) && (
+        <p className="text-sm text-muted-foreground">
+          Selected range: <span className="font-mono font-semibold">{range.from || '?'}</span> to <span className="font-mono font-semibold">{range.to || '?'}</span>
         </p>
       )}
     </div>
@@ -462,6 +481,22 @@ export function DesignSystem() {
               <div className="space-y-2">
                 <Label htmlFor="disabled-datetime">Disabled</Label>
                 <DateTimePicker id="disabled-datetime" value="2024-12-25T18:00" disabled />
+              </div>
+            </div>
+          </div>
+
+          {/* Time Range Picker */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Time Range Picker</h3>
+            <div className="space-y-4">
+              <TimeRangePickerDemo />
+              <div className="space-y-2">
+                <Label>With initial value</Label>
+                <TimeRangePicker value={{ from: '2024-01-15T10:00', to: '2024-01-15T14:00' }} />
+              </div>
+              <div className="space-y-2">
+                <Label>Disabled</Label>
+                <TimeRangePicker value={{ from: '2024-12-25T09:00', to: '2024-12-25T17:00' }} disabled />
               </div>
             </div>
           </div>
