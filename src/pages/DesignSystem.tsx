@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Input } from '@/components/ui/input'
@@ -22,6 +23,14 @@ import { TimePicker } from '@/components/ui/time-picker'
 import { DateTimePicker } from '@/components/ui/datetime-picker'
 import { TimeRangePicker } from '@/components/ui/time-range-picker'
 import type { TimeRange } from '@/components/ui/time-range-picker'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer'
+import { toast } from '@/components/ui/use-toast'
+import { ToastAction } from '@/components/ui/toast'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { designTokens } from '@/lib/design-tokens'
 
 // Utility function to generate primary color variants from the current theme
@@ -926,6 +935,358 @@ export function DesignSystem() {
                   <Avatar alt="Alice" />
                   <Avatar>?</Avatar>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Accordion */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Accordion</h3>
+            <div className="space-y-4 max-w-2xl">
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>What is this design system?</AccordionTrigger>
+                  <AccordionContent>
+                    This is a comprehensive design system built with React, TypeScript, and Tailwind CSS. It includes a wide range of components that follow best practices for accessibility and user experience.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger>How can I use these components?</AccordionTrigger>
+                  <AccordionContent>
+                    All components are available in the <code className="text-sm bg-muted px-1 py-0.5 rounded">src/components/ui</code> directory. Simply import the component you need and use it in your application.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>Are these components accessible?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes! All components are built on top of Radix UI primitives, which provide excellent accessibility out of the box. They follow WAI-ARIA guidelines and support keyboard navigation.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          </div>
+
+          {/* Collapsible */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Collapsible Section</h3>
+            <div className="space-y-4 max-w-2xl">
+              <Collapsible className="w-full space-y-2">
+                <div className="flex items-center justify-between space-x-4 px-4">
+                  <h4 className="text-sm font-semibold">Advanced Settings</h4>
+                  <CollapsibleTrigger asChild>
+                    <Button variant="ghost" size="sm" className="w-9 p-0">
+                      <ChevronDown className="h-4 w-4" />
+                      <span className="sr-only">Toggle</span>
+                    </Button>
+                  </CollapsibleTrigger>
+                </div>
+                <div className="rounded-md border px-4 py-3 text-sm">
+                  Main content always visible
+                </div>
+                <CollapsibleContent className="space-y-2">
+                  <div className="rounded-md border px-4 py-3 text-sm">
+                    Additional setting 1
+                  </div>
+                  <div className="rounded-md border px-4 py-3 text-sm">
+                    Additional setting 2
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </div>
+          </div>
+
+          {/* Dialog/Modal */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Dialog / Modal / Popup</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Basic dialog</p>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline">Open Dialog</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Welcome to the Dialog</DialogTitle>
+                      <DialogDescription>
+                        This is a modal dialog that can display important information or forms.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="py-4">
+                      <p className="text-sm">Dialog content goes here. You can add forms, information, or any other content.</p>
+                    </div>
+                    <DialogFooter>
+                      <Button variant="outline">Cancel</Button>
+                      <Button>Confirm</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </div>
+            </div>
+          </div>
+
+          {/* Tabs */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Tabs</h3>
+            <div className="space-y-4">
+              <Tabs defaultValue="account" className="w-full max-w-2xl">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="account">Account</TabsTrigger>
+                  <TabsTrigger value="password">Password</TabsTrigger>
+                  <TabsTrigger value="settings">Settings</TabsTrigger>
+                </TabsList>
+                <TabsContent value="account" className="space-y-4">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Account</CardTitle>
+                      <CardDescription>
+                        Make changes to your account here.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      <div className="space-y-1">
+                        <Label htmlFor="name">Name</Label>
+                        <Input id="name" defaultValue="John Doe" />
+                      </div>
+                      <div className="space-y-1">
+                        <Label htmlFor="username">Username</Label>
+                        <Input id="username" defaultValue="@johndoe" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+                <TabsContent value="password" className="space-y-4">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Password</CardTitle>
+                      <CardDescription>
+                        Change your password here.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      <div className="space-y-1">
+                        <Label htmlFor="current">Current password</Label>
+                        <Input id="current" type="password" />
+                      </div>
+                      <div className="space-y-1">
+                        <Label htmlFor="new">New password</Label>
+                        <Input id="new" type="password" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+                <TabsContent value="settings" className="space-y-4">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Settings</CardTitle>
+                      <CardDescription>
+                        Manage your preferences.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <Label htmlFor="notifications">Email notifications</Label>
+                        <Switch id="notifications" />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <Label htmlFor="marketing">Marketing emails</Label>
+                        <Switch id="marketing" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              </Tabs>
+            </div>
+          </div>
+
+          {/* Drawer */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Drawer</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Different drawer positions</p>
+                <div className="flex flex-wrap gap-4">
+                  <Drawer>
+                    <DrawerTrigger asChild>
+                      <Button variant="outline">Open from Right</Button>
+                    </DrawerTrigger>
+                    <DrawerContent side="right">
+                      <DrawerHeader>
+                        <DrawerTitle>Right Drawer</DrawerTitle>
+                        <DrawerDescription>
+                          This drawer slides in from the right side.
+                        </DrawerDescription>
+                      </DrawerHeader>
+                      <div className="p-4">
+                        <p className="text-sm">Drawer content goes here. Perfect for navigation menus or forms.</p>
+                      </div>
+                    </DrawerContent>
+                  </Drawer>
+
+                  <Drawer>
+                    <DrawerTrigger asChild>
+                      <Button variant="outline">Open from Left</Button>
+                    </DrawerTrigger>
+                    <DrawerContent side="left">
+                      <DrawerHeader>
+                        <DrawerTitle>Left Drawer</DrawerTitle>
+                        <DrawerDescription>
+                          This drawer slides in from the left side.
+                        </DrawerDescription>
+                      </DrawerHeader>
+                      <div className="p-4">
+                        <p className="text-sm">Commonly used for navigation menus.</p>
+                      </div>
+                    </DrawerContent>
+                  </Drawer>
+
+                  <Drawer>
+                    <DrawerTrigger asChild>
+                      <Button variant="outline">Open from Top</Button>
+                    </DrawerTrigger>
+                    <DrawerContent side="top">
+                      <DrawerHeader>
+                        <DrawerTitle>Top Drawer</DrawerTitle>
+                        <DrawerDescription>
+                          This drawer slides in from the top.
+                        </DrawerDescription>
+                      </DrawerHeader>
+                      <div className="p-4">
+                        <p className="text-sm">Great for notifications or alerts.</p>
+                      </div>
+                    </DrawerContent>
+                  </Drawer>
+
+                  <Drawer>
+                    <DrawerTrigger asChild>
+                      <Button variant="outline">Open from Bottom</Button>
+                    </DrawerTrigger>
+                    <DrawerContent side="bottom">
+                      <DrawerHeader>
+                        <DrawerTitle>Bottom Drawer</DrawerTitle>
+                        <DrawerDescription>
+                          This drawer slides in from the bottom.
+                        </DrawerDescription>
+                      </DrawerHeader>
+                      <div className="p-4">
+                        <p className="text-sm">Perfect for mobile-style action sheets.</p>
+                      </div>
+                    </DrawerContent>
+                  </Drawer>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Toast */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Toast Message (Dismissible)</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Toast variants</p>
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      toast({
+                        title: "Default Toast",
+                        description: "This is a default toast message.",
+                      })
+                    }}
+                  >
+                    Show Default
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      toast({
+                        variant: "destructive",
+                        title: "Error Toast",
+                        description: "Something went wrong!",
+                      })
+                    }}
+                  >
+                    Show Error
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      toast({
+                        variant: "success",
+                        title: "Success!",
+                        description: "Your action was completed successfully.",
+                      })
+                    }}
+                  >
+                    Show Success
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      toast({
+                        title: "With Action",
+                        description: "You can add actions to toasts.",
+                        action: (
+                          <ToastAction altText="Undo">Undo</ToastAction>
+                        ),
+                      })
+                    }}
+                  >
+                    With Action
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Alert */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Alert with Variants</h3>
+            <div className="space-y-4 max-w-2xl">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Default</p>
+                <Alert>
+                  <AlertTitle>Heads up!</AlertTitle>
+                  <AlertDescription>
+                    You can add components to your app using the cli.
+                  </AlertDescription>
+                </Alert>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Info</p>
+                <Alert variant="info">
+                  <AlertTitle>Information</AlertTitle>
+                  <AlertDescription>
+                    This is an informational message with important details.
+                  </AlertDescription>
+                </Alert>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Success</p>
+                <Alert variant="success">
+                  <AlertTitle>Success!</AlertTitle>
+                  <AlertDescription>
+                    Your operation completed successfully.
+                  </AlertDescription>
+                </Alert>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Warning</p>
+                <Alert variant="warning">
+                  <AlertTitle>Warning</AlertTitle>
+                  <AlertDescription>
+                    Please review your settings before proceeding.
+                  </AlertDescription>
+                </Alert>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Destructive</p>
+                <Alert variant="destructive">
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription>
+                    Your session has expired. Please log in again.
+                  </AlertDescription>
+                </Alert>
               </div>
             </div>
           </div>
