@@ -1,51 +1,42 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-type Theme = 'sky' | 'sea' | 'forest' | 'gold' | 'pink' | 'chocolate' | 'halloween' | 'diwali' | 'valentine'
-type Mode = 'light' | 'dark'
+type ThemeAppearance = 'light' | 'dark' | 'inherit'
 
 interface ThemeContextType {
-  theme: Theme
-  mode: Mode
-  setTheme: (theme: Theme) => void
-  setMode: (mode: Mode) => void
-  toggleMode: () => void
+  appearance: ThemeAppearance
+  setAppearance: (appearance: ThemeAppearance) => void
+  toggleAppearance: () => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem('theme')
-    return (stored as Theme) || 'sky'
-  })
-  
-  const [mode, setMode] = useState<Mode>(() => {
-    const stored = localStorage.getItem('mode')
-    return (stored as Mode) || 'light'
+  const [appearance, setAppearance] = useState<ThemeAppearance>(() => {
+    const stored = localStorage.getItem('appearance')
+    return (stored as ThemeAppearance) || 'inherit'
   })
 
   useEffect(() => {
-    localStorage.setItem('theme', theme)
-    localStorage.setItem('mode', mode)
-    
-    const root = document.documentElement
-    
-    // Remove all theme classes
-    root.classList.remove('theme-sky', 'theme-sea', 'theme-forest', 'theme-gold', 'theme-pink', 'theme-chocolate', 'theme-halloween', 'theme-diwali', 'theme-valentine')
-    root.classList.remove('dark', 'light')
-    
-    // Add current theme and mode
-    root.classList.add(`theme-${theme}`)
-    root.classList.add(mode)
-  }, [theme, mode])
+    localStorage.setItem('appearance', appearance)
+  }, [appearance])
 
-  const toggleMode = () => {
-    setMode(prevMode => prevMode === 'light' ? 'dark' : 'light')
+  const toggleAppearance = () => {
+    setAppearance((prev) => {
+      if (prev === 'inherit') {
+        // If inherit, check system preference and toggle to opposite
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        return systemPrefersDark ? 'light' : 'dark'
+      } else if (prev === 'light') {
+        return 'dark'
+      } else {
+        return 'light'
+      }
+    })
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, mode, setTheme, setMode, toggleMode }}>
+    <ThemeContext.Provider value={{ appearance, setAppearance, toggleAppearance }}>
       {children}
     </ThemeContext.Provider>
   )
