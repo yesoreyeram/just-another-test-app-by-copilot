@@ -18,6 +18,7 @@ import { Avatar } from '@/components/ui/avatar'
 import { ColorPicker } from '@/components/ui/color-picker'
 import { DatePicker } from '@/components/ui/date-picker'
 import { TimePicker } from '@/components/ui/time-picker'
+import { DateTimePicker } from '@/components/ui/datetime-picker'
 import { designTokens } from '@/lib/design-tokens'
 
 // Demo component for DatePicker with state
@@ -48,6 +49,23 @@ function TimePickerDemo() {
       {time && (
         <p className="text-sm text-muted-foreground">
           Selected time: <span className="font-mono font-semibold">{time}</span>
+        </p>
+      )}
+    </div>
+  )
+}
+
+// Demo component for DateTimePicker with state
+function DateTimePickerDemo() {
+  const [datetime, setDatetime] = useState('')
+  
+  return (
+    <div className="space-y-2">
+      <Label htmlFor="datetime-picker">Pick a date and time</Label>
+      <DateTimePicker id="datetime-picker" value={datetime} onChange={setDatetime} />
+      {datetime && (
+        <p className="text-sm text-muted-foreground">
+          Selected datetime: <span className="font-mono font-semibold">{datetime}</span>
         </p>
       )}
     </div>
@@ -428,6 +446,22 @@ export function DesignSystem() {
               <div className="space-y-2">
                 <Label htmlFor="disabled-time">Disabled</Label>
                 <TimePicker id="disabled-time" value="09:00" disabled />
+              </div>
+            </div>
+          </div>
+
+          {/* DateTime Picker */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">DateTime Picker</h3>
+            <div className="space-y-4 max-w-md">
+              <DateTimePickerDemo />
+              <div className="space-y-2">
+                <Label htmlFor="datetime-with-value">With initial value</Label>
+                <DateTimePicker id="datetime-with-value" value="2024-01-15T14:30" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="disabled-datetime">Disabled</Label>
+                <DateTimePicker id="disabled-datetime" value="2024-12-25T18:00" disabled />
               </div>
             </div>
           </div>
