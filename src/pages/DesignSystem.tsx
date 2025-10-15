@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Input } from '@/components/ui/input'
@@ -32,6 +32,14 @@ import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, Dr
 import { toast } from '@/components/ui/use-toast'
 import { ToastAction } from '@/components/ui/toast'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Spinner } from '@/components/ui/spinner'
+import { Progress } from '@/components/ui/progress'
+import { Section } from '@/components/ui/section'
+import { SectionDivider } from '@/components/ui/section-divider'
+import { Breadcrumbs } from '@/components/ui/breadcrumbs'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import { designTokens } from '@/lib/design-tokens'
 
 // Utility function to generate primary color variants from the current theme
@@ -1346,6 +1354,303 @@ export function DesignSystem() {
                     Your session has expired. Please log in again.
                   </AlertDescription>
                 </Alert>
+              </div>
+            </div>
+          </div>
+
+          {/* Spinner */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Spinner</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Sizes</p>
+                <div className="flex items-center gap-4">
+                  <Spinner size="sm" />
+                  <Spinner size="md" />
+                  <Spinner size="lg" />
+                  <Spinner size="xl" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">With label</p>
+                <div className="space-y-2">
+                  <Spinner label="Loading..." showLabel />
+                  <Spinner label="Processing your request..." showLabel size="lg" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Progress */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Progress / Loading Indicator</h3>
+            <div className="space-y-4 max-w-2xl">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Basic progress bar</p>
+                <Progress value={50} />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">With percentage</p>
+                <Progress value={75} showPercentage />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">With label</p>
+                <Progress value={60} label="Uploading files..." />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">With label and percentage</p>
+                <Progress value={85} label="Processing" showPercentage />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Variants</p>
+                <div className="space-y-3">
+                  <Progress value={50} variant="default" label="Default" showPercentage />
+                  <Progress value={75} variant="success" label="Success" showPercentage />
+                  <Progress value={60} variant="warning" label="Warning" showPercentage />
+                  <Progress value={30} variant="destructive" label="Error" showPercentage />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Section */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Section</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Section with title and description</p>
+                <Section title="Section Title" description="This is a section description that explains what this section contains.">
+                  <p className="text-sm">Section content goes here. Sections help organize content with consistent spacing and headings.</p>
+                </Section>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Different spacing variants</p>
+                <Section spacing="sm" title="Small Spacing" className="border rounded-md p-4">
+                  <p className="text-sm">Content with small spacing</p>
+                </Section>
+                <Section spacing="lg" title="Large Spacing" className="border rounded-md p-4">
+                  <p className="text-sm">Content with large spacing</p>
+                </Section>
+              </div>
+            </div>
+          </div>
+
+          {/* Section Divider */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Section Divider</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Simple divider</p>
+                <div>
+                  <p className="text-sm">Content above</p>
+                  <SectionDivider />
+                  <p className="text-sm">Content below</p>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Divider with text</p>
+                <div>
+                  <p className="text-sm">Sign in with email</p>
+                  <SectionDivider text="OR" />
+                  <p className="text-sm">Sign in with social accounts</p>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Vertical divider with text</p>
+                <div className="flex h-20 items-center">
+                  <div className="flex-1 text-center">
+                    <p className="text-sm">Left content</p>
+                  </div>
+                  <div className="h-full">
+                    <SectionDivider text="OR" orientation="vertical" />
+                  </div>
+                  <div className="flex-1 text-center">
+                    <p className="text-sm">Right content</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Breadcrumbs */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Breadcrumbs</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Basic breadcrumbs</p>
+                <Breadcrumbs
+                  items={[
+                    { label: 'Home', href: '/' },
+                    { label: 'Products', href: '/products' },
+                    { label: 'Electronics', href: '/products/electronics' },
+                    { label: 'Laptops' },
+                  ]}
+                />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">With custom separator</p>
+                <Breadcrumbs
+                  items={[
+                    { label: 'Dashboard', href: '#' },
+                    { label: 'Settings', href: '#' },
+                    { label: 'Profile' },
+                  ]}
+                  separator={<span className="mx-1">/</span>}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Carousel */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Carousel</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Image carousel</p>
+                <Carousel className="w-full max-w-xl mx-auto">
+                  <CarouselContent>
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <CarouselItem key={index}>
+                        <div className="p-1">
+                          <Card>
+                            <CardContent className="flex aspect-square items-center justify-center p-6">
+                              <span className="text-4xl font-semibold">{index + 1}</span>
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Content cards carousel</p>
+                <Carousel className="w-full max-w-xl mx-auto">
+                  <CarouselContent>
+                    <CarouselItem>
+                      <Card>
+                        <CardHeader>
+                          <CardTitle>First Slide</CardTitle>
+                          <CardDescription>This is the first slide in the carousel</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm">Carousel content can be anything - images, cards, or custom components.</p>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                    <CarouselItem>
+                      <Card>
+                        <CardHeader>
+                          <CardTitle>Second Slide</CardTitle>
+                          <CardDescription>This is the second slide</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm">Navigate using arrow buttons or keyboard arrows.</p>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                    <CarouselItem>
+                      <Card>
+                        <CardHeader>
+                          <CardTitle>Third Slide</CardTitle>
+                          <CardDescription>This is the third slide</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-sm">Built on Embla Carousel for smooth animations.</p>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  </CarouselContent>
+                  <CarouselPrevious />
+                  <CarouselNext />
+                </Carousel>
+              </div>
+            </div>
+          </div>
+
+          {/* Aspect Ratio */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Aspect Ratio</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">16:9 ratio (video)</p>
+                <div className="max-w-md">
+                  <AspectRatio ratio={16 / 9} className="bg-muted rounded-md overflow-hidden">
+                    <div className="flex items-center justify-center h-full text-muted-foreground">
+                      16:9 Aspect Ratio
+                    </div>
+                  </AspectRatio>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">4:3 ratio (traditional photo)</p>
+                <div className="max-w-md">
+                  <AspectRatio ratio={4 / 3} className="bg-muted rounded-md overflow-hidden">
+                    <div className="flex items-center justify-center h-full text-muted-foreground">
+                      4:3 Aspect Ratio
+                    </div>
+                  </AspectRatio>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">1:1 ratio (square)</p>
+                <div className="max-w-xs">
+                  <AspectRatio ratio={1} className="bg-muted rounded-md overflow-hidden">
+                    <div className="flex items-center justify-center h-full text-muted-foreground">
+                      1:1 Aspect Ratio
+                    </div>
+                  </AspectRatio>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Hover Card */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Hover Card</h3>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">Basic hover card</p>
+                <div className="flex gap-4">
+                  <HoverCard>
+                    <HoverCardTrigger asChild>
+                      <Button variant="outline">Hover me</Button>
+                    </HoverCardTrigger>
+                    <HoverCardContent>
+                      <div className="space-y-2">
+                        <h4 className="text-sm font-semibold">Hover Card</h4>
+                        <p className="text-sm text-muted-foreground">
+                          This is a hover card that displays additional information on hover.
+                        </p>
+                      </div>
+                    </HoverCardContent>
+                  </HoverCard>
+
+                  <HoverCard>
+                    <HoverCardTrigger asChild>
+                      <Button variant="link">@username</Button>
+                    </HoverCardTrigger>
+                    <HoverCardContent className="w-80">
+                      <div className="flex justify-between space-x-4">
+                        <Avatar fallback="JD" />
+                        <div className="space-y-1">
+                          <h4 className="text-sm font-semibold">@username</h4>
+                          <p className="text-sm text-muted-foreground">
+                            Software developer and open source contributor. Building amazing web applications.
+                          </p>
+                          <div className="flex items-center pt-2">
+                            <Calendar className="mr-2 h-4 w-4 opacity-70" />
+                            <span className="text-xs text-muted-foreground">
+                              Joined December 2023
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </HoverCardContent>
+                  </HoverCard>
+                </div>
               </div>
             </div>
           </div>
