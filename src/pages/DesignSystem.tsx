@@ -17,6 +17,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Avatar } from '@/components/ui/avatar'
 import { ColorPicker } from '@/components/ui/color-picker'
 import { DatePicker } from '@/components/ui/date-picker'
+import { TimePicker } from '@/components/ui/time-picker'
 import { designTokens } from '@/lib/design-tokens'
 
 // Demo component for DatePicker with state
@@ -30,6 +31,23 @@ function DatePickerDemo() {
       {date && (
         <p className="text-sm text-muted-foreground">
           Selected date: <span className="font-mono font-semibold">{date}</span>
+        </p>
+      )}
+    </div>
+  )
+}
+
+// Demo component for TimePicker with state
+function TimePickerDemo() {
+  const [time, setTime] = useState('')
+  
+  return (
+    <div className="space-y-2">
+      <Label htmlFor="time-picker">Pick a time</Label>
+      <TimePicker id="time-picker" value={time} onChange={setTime} />
+      {time && (
+        <p className="text-sm text-muted-foreground">
+          Selected time: <span className="font-mono font-semibold">{time}</span>
         </p>
       )}
     </div>
@@ -394,6 +412,22 @@ export function DesignSystem() {
               <div className="space-y-2">
                 <Label htmlFor="disabled-date">Disabled</Label>
                 <DatePicker id="disabled-date" value="2024-12-25" disabled />
+              </div>
+            </div>
+          </div>
+
+          {/* Time Picker */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">Time Picker</h3>
+            <div className="space-y-4 max-w-md">
+              <TimePickerDemo />
+              <div className="space-y-2">
+                <Label htmlFor="time-with-value">With initial value</Label>
+                <TimePicker id="time-with-value" value="14:30" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="disabled-time">Disabled</Label>
+                <TimePicker id="disabled-time" value="09:00" disabled />
               </div>
             </div>
           </div>
